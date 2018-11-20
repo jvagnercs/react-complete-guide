@@ -14,17 +14,6 @@ class App extends Component {
     showPersons: false
   }
 
-  switchNameHandler = newName => {
-    this.setState({
-      persons: [
-        { name: newName, age: 28},
-        { name: 'Manu', age: 29},
-        { name: 'Stephanie', age: 27},
-      ]
-    })
-  }
-
-  
   nameChangedHandler = event => {
     this.setState({
       persons: [
@@ -33,6 +22,12 @@ class App extends Component {
         { name: 'Stephanie', age: 26 },
       ]
     })
+  }
+
+  deletePersonHandler = personIndex => {
+    const persons = this.state.persons
+    persons.splice(personIndex, 1)
+    this.setState({persons: persons})
   }
 
   togglePersonsHandler = () => {
@@ -51,6 +46,21 @@ class App extends Component {
       cursor: 'pointer'
     }
 
+    let persons = null
+
+    if (this.state.showPersons) {
+      persons = (
+        <div>
+          {this.state.persons.map((person, index) => 
+            <Person
+              // click={() => this.deletePersonHandler(index)}
+              click={this.deletePersonHandler.bind(this, index)}
+              name={person.name}
+              age={person.age} />
+          )}
+        </div>
+      )
+    }
 
     return (
       <div className="App">
@@ -59,24 +69,8 @@ class App extends Component {
         <button
           style={style}
           onClick={this.togglePersonsHandler}>Toggle Persons</button>
-        {
-          this.state.showPersons === true ?
-          <div>
-            <Person
-              name={this.state.persons[0].name}
-              age={this.state.persons[0].age} />
-            <Person
-              name={this.state.persons[1].name}
-              age={this.state.persons[1].age}
-              // not recommended
-              click={ () => this.switchNameHandler("MAXXXXX!")}
-              changed={this.nameChangedHandler}>My Hobbies: Racing</Person>
-            <Person
-              name={this.state.persons[2].name}
-              age={this.state.persons[2].age} />
-          </div> : null
-        }
-    </div>
+          {persons}
+      </div>
     );
 
     // return React.createElement('div', {className: "App"}, React.createElement('h1', null, 'Hi I\'m a react App!!!'))
