@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Person from './Person/Person'
 import './App.css'
+import Radium from 'radium'
 
 class App extends Component {
 
@@ -16,15 +17,10 @@ class App extends Component {
 
   nameChangedHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex(p => p.id === id)
-    
     const person = {...this.state.persons[personIndex]}
-    
     person.name = event.target.value
-
     const persons = [...this.state.persons]
-
     persons[personIndex] = person
-
     this.setState({
       persons: persons
     })
@@ -43,8 +39,6 @@ class App extends Component {
   }
 
   render() {
-
-
     // inline styles
     const style = {
       backgroundColor: 'green',
@@ -52,7 +46,11 @@ class App extends Component {
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      ':hover': {
+        backgroundColor: 'salmon',
+        color: 'black'
+      }
     }
 
     let persons = null
@@ -73,7 +71,11 @@ class App extends Component {
           )}
         </div>
       )
-    style.backgroundColor = 'red'
+      style.backgroundColor = 'red'
+      style[':hover'] = {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
     }
     let classes = []
 
@@ -84,7 +86,6 @@ class App extends Component {
     if (this.state.persons.length <= 1) {
       classes.push('bold')
     }
-
 
     return (
       <div className="App">
@@ -100,4 +101,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Radium(App);
