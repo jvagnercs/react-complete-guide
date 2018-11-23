@@ -46,7 +46,8 @@ class App extends Component {
 
     // inline styles
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
@@ -66,9 +67,12 @@ class App extends Component {
               age={person.age}
               key={person.id}
               changed={event => this.nameChangedHandler(event, person.id)}/>
+              // code bellow doesn't work, why?  Unexpected use of 'event'  no-restricted-globals
+              // changed={this.nameChangedHandler.bind(this, event, person.id)}/>
           )}
         </div>
       )
+    style.backgroundColor = 'red'
     }
 
     return (
