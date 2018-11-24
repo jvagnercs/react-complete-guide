@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Person from './Person/Person'
-import './App.css'
+import cssClasses from './App.module.css'
 import Radium, { StyleRoot } from 'radium'
 
 class App extends Component {
@@ -77,19 +77,19 @@ class App extends Component {
         color: 'black'
       }
     }
-    let classes = []
+    const classes = []
 
     if (this.state.persons.length <= 2) {
-      classes.push('red')
+      classes.push( cssClasses.red )
     }
 
     if (this.state.persons.length <= 1) {
-      classes.push('bold')
+      classes.push(cssClasses.bold)
     }
 
     return (
       <StyleRoot>
-        <div className="App">
+        <div className={cssClasses.App}>
           <h1>Hi, I'm a React App</h1>
           <p className={classes.join(' ')}>This is really working!</p>
           <button
