@@ -4,6 +4,12 @@ import Radium from 'radium'
 
 const person = props => {
 
+    // const rnd = Math.random()
+
+    // if (rnd > 0.7) {
+    //     throw new Error('Something went wrong!')
+    // }
+
     return (
     <div className={cssClasses.person} >
         <p onClick={props.click}>I'm {props.name} and I am {props.age} year old!</p>

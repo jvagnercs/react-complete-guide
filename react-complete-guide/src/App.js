@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Person from './Person/Person'
 import cssClasses from './App.module.css'
 import Radium, { StyleRoot } from 'radium'
+import ErrorBoundary from "./ErrorBoundary/ErrorBoundary"
 
 class App extends Component {
 
@@ -60,15 +61,18 @@ class App extends Component {
       persons = (
         <div>
           {this.state.persons.map((person, index) => 
-            <Person
+            <ErrorBoundary>
+              <Person
               // click={() => this.deletePersonHandler(index)}
               click={this.deletePersonHandler.bind(this, index)}
               name={person.name}
               age={person.age}
               key={person.id}
               changed={event => this.nameChangedHandler(event, person.id)}/>
+            </ ErrorBoundary>
               // code bellow doesn't work, why?  Unexpected use of 'event'  no-restricted-globals
               // changed={this.nameChangedHandler.bind(this, event, person.id)}/>
+            
           )}
         </div>
       )
