@@ -1,21 +1,14 @@
 import React from 'react'
 import cssClasses from './Person.module.css'
-import Radium from 'radium'
 
-const person = props => {
+class Person extends React.Component {
+    render () {
+        return <div className={cssClasses.person} >
+            <p onClick={this.props.click}>I'm {this.props.name} and I am {this.props.age} year old!</p>
+            <p>{this.props.children}</p>
+            <input type="text" onChange={this.props.changed} value={this.props.name} />
+        </div>
+    }
+}
 
-    // const rnd = Math.random()
-
-    // if (rnd > 0.7) {
-    //     throw new Error('Something went wrong!')
-    // }
-
-    return (
-    <div className={cssClasses.person} >
-        <p onClick={props.click}>I'm {props.name} and I am {props.age} year old!</p>
-        <p>{props.children}</p>
-        <input type="text" onChange={props.changed} value={props.name} />
-    </div>
-)}
-
-export default Radium(person)
+export default Person
